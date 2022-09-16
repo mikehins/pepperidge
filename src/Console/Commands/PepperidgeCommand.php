@@ -28,18 +28,18 @@ class PepperidgeCommand extends Command
         file_put_contents(base_path('.env'), $content);
 		
 		$content = file_get_contents(resource_path('views/layouts/app.blade.php'));
-        $content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', $content);
+        $content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'/assets/css/app.css\') }}"><script src="{{ mix(\'/assets/js/app.js\') }}" defer></script>', $content);
         file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
 	
 	    copy(__DIR__ . '/../../Stubs/app.js', resource_path('js/app.js'));
 	    copy(__DIR__ . '/../../Stubs/bootstrap.js', resource_path('js/bootstrap.js'));
-	    exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('js'));
+	    exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('/'));
 		
         exec('npm install');
         exec('npm run dev');
 
         $this->line('Done ! Please make sure the js and css files have been added to your template.');
-        $this->line('<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>');
+        $this->line('<link rel="stylesheet" href="{{ mix(\'/assets/css/app.css\') }}"><script src="{{ mix(\'/assets/js/app.js\') }}" defer></script>');
 
         return 0;
     }
