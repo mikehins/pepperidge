@@ -6,10 +6,10 @@ mix.js('resources/js/app.js', 'public/js')
 
 
 // ALL PAGES SEPERATLY
-fs.readdirSync('resources/js/pages')
+fs.readdirSync('resources/assets/js/pages')
     .filter(p => /\.js$/.test(p))
-    .forEach(p => mix.js('resources/js/pages/' + p, 'public/js/pages'))
+    .forEach(p => mix.js('resources/js/pages/' + p, 'public/assets/js/pages'))
 
-fs.readdirSync('resources/sass/pages')
+fs.readdirSync('resources/assets/sass/pages')
     .filter(p => /\.scss$/.test(p))
-    .forEach(p => mix.sass('resources/sass/pages/' + p, 'public/css/pages'))
+    .forEach(p => mix.sass('resources/sass/pages/' + p, 'public/assets/css/pages'))

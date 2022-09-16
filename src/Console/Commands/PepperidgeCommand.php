@@ -16,9 +16,6 @@ class PepperidgeCommand extends Command
         $this->updatePackageDotJson();
 
         copy(__DIR__ . '/../../Stubs/webpack.mix.js', base_path('webpack.mix.js'));
-        copy(__DIR__ . '/../../Stubs/app.js', resource_path('js/app.js'));
-        copy(__DIR__ . '/../../Stubs/bootstrap.js', resource_path('js/bootstrap.js'));
-        exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('js'));
         exec('rm vite.config.js');
 
         exec('npm remove vite laravel-vite-plugin lodash');
@@ -33,7 +30,11 @@ class PepperidgeCommand extends Command
 		$content = file_get_contents(resource_path('views/layouts/app.blade.php'));
         $content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', $content);
         file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
-
+	
+	    copy(__DIR__ . '/../../Stubs/app.js', resource_path('js/app.js'));
+	    copy(__DIR__ . '/../../Stubs/bootstrap.js', resource_path('js/bootstrap.js'));
+	    exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('js'));
+		
         exec('npm install');
         exec('npm run dev');
 
