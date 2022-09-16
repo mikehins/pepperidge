@@ -12,7 +12,7 @@ Use Laravel mix/webpack in Laravel 9 with bootstrap 5 and authentification views
 
 ## Install
 
-`composer require mikehins/Pepperidge`
+`composer require mikehins/pepperidge`
 
 ## Usage
 

@@ -18,11 +18,11 @@ class PepperidgeCommand extends Command
         copy(__DIR__ . '/../../Stubs/webpack.mix.js', base_path('webpack.mix.js'));
         copy(__DIR__ . '/../../Stubs/app.js', resource_path('js/app.js'));
         copy(__DIR__ . '/../../Stubs/bootstrap.js', resource_path('js/bootstrap.js'));
-        exec('cp -r ' . __DIR__ . '/../../Stubs/pages ' . resource_path('js'));
+        exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('js'));
         exec('rm vite.config.js');
 
         exec('npm remove vite laravel-vite-plugin lodash');
-        exec('npm i laravel-mix jquery resolve-url-loader sass-loader --save-dev');
+        exec('npm i laravel-mix jquery resolve-url-loader sass-loader fs path --save-dev');
         exec('composer require laravel/ui');
         exec('php artisan ui bootstrap --auth');
 
@@ -30,9 +30,9 @@ class PepperidgeCommand extends Command
         $content = str_replace('VITE_', 'MIX_', $content);
         file_put_contents(base_path('.env'), $content);
 		
-		$content = file_get_contents(base_path('.env'));
+		$content = file_get_contents(resource_path('views/layouts/app.blade.php'));
         $content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', $content);
-        file_put_contents(base_path('.env'), $content);
+        file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
 
         exec('npm install');
         exec('npm run dev');
