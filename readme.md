@@ -4,6 +4,7 @@
 [![Travis](https://img.shields.io/travis/mikehins/Pepperidge.svg?style=flat-square)]()
 [![Total Downloads](https://img.shields.io/packagist/dt/mikehins/Pepperidge.svg?style=flat-square)](https://packagist.org/packages/mikehins/Pepperidge)
 
+[![](https://i.imgflip.com/6tmdsq.jpg)]
 ## Install
 `composer require mikehins/Pepperidge`
 

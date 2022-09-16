@@ -4,7 +4,7 @@ namespace Mikehins\Pepperidge\Console\Commands;
 
 use Illuminate\Console\Command;
 
-// https://i.imgflip.com/6tmdsq.jpg
+
 class PepperidgeCommand extends Command
 {
     protected $signature = 'pepperidge:remembers';
@@ -29,11 +29,15 @@ class PepperidgeCommand extends Command
         $content = file_get_contents(base_path('.env'));
         $content = str_replace('VITE_', 'MIX_', $content);
         file_put_contents(base_path('.env'), $content);
+		
+		$content = file_get_contents(base_path('.env'));
+        $content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', $content);
+        file_put_contents(base_path('.env'), $content);
 
-        //exec('npm install');
+        exec('npm install');
         exec('npm run dev');
 
-        $this->line('Done ! Please add / replace the css in your template file.');
+        $this->line('Done ! Please make sure the js and css files have been added to your template.');
         $this->line('<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>');
 
         return 0;
