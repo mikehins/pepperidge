@@ -5,6 +5,10 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/mikehins/Pepperidge.svg?style=flat-square)](https://packagist.org/packages/mikehins/Pepperidge)
 
 [![](https://i.imgflip.com/6tmdsq.jpg)]
+
+## Description
+Use Laravel mix/webpack in Laravel 9 with bootstrap 5 and authentification views like in the good old days.
+
 ## Install
 `composer require mikehins/Pepperidge`
 
