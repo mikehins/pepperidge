@@ -7,23 +7,25 @@
 [![](https://i.imgflip.com/6tmdsq.jpg)]
 
 ## Description
+
 Use Laravel mix/webpack in Laravel 9 with bootstrap 5 and authentification views like in the good old days.
 
 ## Install
+
 `composer require mikehins/Pepperidge`
 
 ## Usage
-`php artisan pepperidge:remembers`
 
-
-``` bash
-vendor/bin/phpunit
+```bash
+php artisan pepperidge:remembers
 ```
 
 ## Changelog
+
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
 ## Contributing
+
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Credits
@@ -32,7 +34,9 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 - [All Contributors](https://github.com/mikehins/Pepperidge/contributors)
 
 ## Security
+
 If you discover any security-related issues, please email mike@hins.dev instead of using the issue tracker.
 
 ## License
+
 The MIT License (MIT). Please see [License File](/LICENSE.md) for more information.
