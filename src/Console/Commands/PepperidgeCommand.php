@@ -28,7 +28,7 @@ class PepperidgeCommand extends Command
         file_put_contents(base_path('.env'), $content);
 		
 		$content = file_get_contents(resource_path('views/layouts/app.blade.php'));
-        $content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'/assets/css/app.css\') }}"><script src="{{ mix(\'/assets/js/app.js\') }}" defer></script>', $content);
+        $content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', $content);
         file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
 	
 	    copy(__DIR__ . '/../../Stubs/app.js', resource_path('js/app.js'));
