@@ -9,10 +9,8 @@
 `composer require mikehins/Pepperidge`
 
 ## Usage
-Write a few lines about the usage of this package.
+`php artisan pepperidge:remembers`
 
-## Testing
-Run the tests with:
 
 ``` bash
 vendor/bin/phpunit
