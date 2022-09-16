@@ -1,0 +1,41 @@
+{
+    "name": "mikehins/pepperidge",
+    "description": "A description for Pepperidge.",
+    "type": "package",
+    "license": "MIT",
+    "keywords": [
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "Mike Hins",
+            "email": "mike@hins.dev"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^7.0|^8.0|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mikehins\\Pepperidge\\": "./src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mikehins\\Pepperidge\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mikehins\\Pepperidge\\PepperidgeServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0"
+    }
+}
