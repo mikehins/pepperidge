@@ -39,7 +39,7 @@ class PepperidgeCommand extends Command
         exec('npm run dev');
 
         $this->line('Done ! Please make sure the js and css files have been added to your template.');
-        $this->line('<link rel="stylesheet" href="{{ mix(\'/assets/css/app.css\') }}"><script src="{{ mix(\'/assets/js/app.js\') }}" defer></script>');
+        $this->line('<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>');
 
         return 0;
     }
