@@ -20,6 +20,16 @@ Use Laravel mix/webpack in Laravel 9 with bootstrap 5 and authentification views
 php artisan pepperidge:remembers
 ```
 
+Be sure to add the scripts in your templates
+```php
+@vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+- or
+
+<link rel="stylesheet" href="{{ mix('css/app.css') }}">
+<script src="{{ mix('js/app.js') }}" defer></script>
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.

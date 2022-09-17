@@ -31,7 +31,7 @@ class PepperidgeCommand extends Command
 		}
 		
 		exec('npm install && npm run dev');
-
+		
 		$this->line('Done ! Please make sure the js and css files have been added to your template.');
 		if ($this->data['type'] === 'Vite') {
 			$this->line('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])');
@@ -66,12 +66,12 @@ class PepperidgeCommand extends Command
 		$content = str_replace('VITE_', 'MIX_', $content);
 		file_put_contents(base_path('.env'), $content);
 		
-		if(file_exists(resource_path('views/layouts/app.blade.php'))) {
+		if (file_exists(resource_path('views/layouts/app.blade.php'))) {
 			$content = file_get_contents(resource_path('views/layouts/app.blade.php'));
 			$content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', $content);
 			file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
 		}
-		if(file_exists(resource_path('views/welcome.blade.php'))) {
+		if (file_exists(resource_path('views/welcome.blade.php'))) {
 			$content = file_get_contents(resource_path('views/welcome.blade.php'));
 			$content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', $content);
 			file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
@@ -112,15 +112,15 @@ class PepperidgeCommand extends Command
 		$content = str_replace('MIX_', 'VITE_', $content);
 		file_put_contents(base_path('.env'), $content);
 		
-		if(file_exists(resource_path('views/layouts/app.blade.php'))) {
+		if (file_exists(resource_path('views/layouts/app.blade.php'))) {
 			$content = file_get_contents(resource_path('views/layouts/app.blade.php'));
-			$content = str_replace('<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', '@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', $content);
+			$content = str_replace(['<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}">', '<script src="{{ mix(\'js/app.js\') }}" defer></script>'], '@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', $content);
 			file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
 		}
-		if(file_exists(resource_path('views/welcome.blade.php'))) {
-			$content = file_get_contents(resource_path('views/welcome.blade.php'));
-			$content = str_replace('<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', '@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', $content);
-			file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
+		if (file_exists(resource_path('views/welcome.blade.php'))) {
+			file_put_contents(resource_path('views/welcome.blade.php'),
+				str_replace(['<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}">', '<script src="{{ mix(\'js/app.js\') }}" defer></script>'], '@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])',
+					file_get_contents(resource_path('views/welcome.blade.php'))));
 		}
 		
 		copy(__DIR__ . '/../../Stubs/vite/app.js', resource_path('js/app.js'));
