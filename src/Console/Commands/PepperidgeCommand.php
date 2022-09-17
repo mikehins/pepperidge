@@ -17,16 +17,16 @@ class PepperidgeCommand extends Command
 	{
 		$this->data = $this->data();
 		
+		if ($this->data['auth']) {
+			exec('composer require laravel/ui');
+			exec('php artisan ui bootstrap --auth');
+		}
+		
 		if ($this->data['type'] === "Vite") {
 			$this->data = array_merge($this->data, $this->vite());
 			$this->updatePackageDotJsonForVite();
 		} else {
 			$this->updatePackageDotJsonForWebpack();
-		}
-
-		if ($this->data['auth']) {
-			exec('composer require laravel/ui');
-			exec('php artisan ui bootstrap --auth');
 		}
 		
 		exec('npm install');
@@ -64,9 +64,16 @@ class PepperidgeCommand extends Command
 		$content = str_replace('VITE_', 'MIX_', $content);
 		file_put_contents(base_path('.env'), $content);
 		
-		$content = file_get_contents(resource_path('views/layouts/app.blade.php'));
-		$content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', $content);
-		file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
+		if(file_exists(resource_path('views/layouts/app.blade.php'))) {
+			$content = file_get_contents(resource_path('views/layouts/app.blade.php'));
+			$content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', $content);
+			file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
+		}
+		if(file_exists(resource_path('views/welcome.blade.php'))) {
+			$content = file_get_contents(resource_path('views/welcome.blade.php'));
+			$content = str_replace('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', '<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', $content);
+			file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
+		}
 		
 		copy(__DIR__ . '/../../Stubs/app.js', resource_path('js/app.js'));
 		copy(__DIR__ . '/../../Stubs/bootstrap.js', resource_path('js/bootstrap.js'));
@@ -103,9 +110,16 @@ class PepperidgeCommand extends Command
 		$content = str_replace('MIX_', 'VITE_', $content);
 		file_put_contents(base_path('.env'), $content);
 		
-		$content = file_get_contents(resource_path('views/layouts/app.blade.php'));
-		$content = str_replace('<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', '@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', $content);
-		file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
+		if(file_exists(resource_path('views/layouts/app.blade.php'))) {
+			$content = file_get_contents(resource_path('views/layouts/app.blade.php'));
+			$content = str_replace('<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', '@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', $content);
+			file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
+		}
+		if(file_exists(resource_path('views/welcome.blade.php'))) {
+			$content = file_get_contents(resource_path('views/welcome.blade.php'));
+			$content = str_replace('<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>', '@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])', $content);
+			file_put_contents(resource_path('views/layouts/app.blade.php'), $content);
+		}
 		
 		copy(__DIR__ . '/../../Stubs/vite/app.js', resource_path('js/app.js'));
 		copy(__DIR__ . '/../../Stubs/vite/bootstrap.js', resource_path('js/bootstrap.js'));
