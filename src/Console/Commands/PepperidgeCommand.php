@@ -29,15 +29,16 @@ class PepperidgeCommand extends Command
 			$this->updatePackageDotJsonForWebpack();
 		}
 		
-		exec('npm install');
-		exec('npm run dev');
-//
+		exec('npm install && npm run dev');
+
 		$this->line('Done ! Please make sure the js and css files have been added to your template.');
 		if ($this->data['type'] === 'Vite') {
 			$this->line('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])');
 		} else {
 			$this->line('<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>');
 		}
+		
+		return 0;
 	}
 	
 	private function updatePackageDotJsonForWebpack(): self
