@@ -4,7 +4,6 @@ const  fs = require('fs');
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
-
 // ALL PAGES SEPERATLY
 fs.readdirSync('resources/assets/js/pages')
     .filter(p => /\.js$/.test(p))
