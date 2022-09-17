@@ -17,9 +17,10 @@ class PepperidgeCommand extends Command
 	{
 		$this->data = $this->data();
 		
+		exec('composer require laravel/ui');
+		exec('php artisan ui bootstrap');
 		if ($this->data['auth']) {
-			exec('composer require laravel/ui');
-			exec('php artisan ui bootstrap --auth');
+			exec('php artisan ui:auth --force');
 		}
 		
 		if ($this->data['type'] === "Vite") {

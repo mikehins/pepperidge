@@ -1,1 +1,1 @@
-console.log('home page script [resources/js/pages/home.js]')
+console.log('home page script [resources/js/pages/home.js]', $)
