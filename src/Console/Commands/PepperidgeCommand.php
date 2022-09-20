@@ -25,11 +25,11 @@ class PepperidgeCommand extends Command
 		
 		if ($this->data['type'] === "Vite") {
 			$this->updatePackageDotJsonForVite();
+			exec('npm install && npm run dev');
 		} else {
 			$this->updatePackageDotJsonForWebpack();
+			exec('npm install && npm run hot');
 		}
-		
-		exec('npm install && npm run dev');
 		
 		$this->line('Done ! Please make sure the js and css files have been added to your template.');
 		if ($this->data['type'] === 'Vite') {
