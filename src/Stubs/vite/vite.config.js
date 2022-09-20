@@ -1,6 +1,6 @@
 import {defineConfig} from 'vite';
-import laravel from 'laravel-vite-plugin';
-import inject from '@rollup/plugin-inject';
+import laravel from 'laravel-vite-plugin'
+import inject from '@rollup/plugin-inject'
 import fs from 'fs'
 import path from 'path'
 

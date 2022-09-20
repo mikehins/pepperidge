@@ -24,7 +24,6 @@ class PepperidgeCommand extends Command
 		}
 		
 		if ($this->data['type'] === "Vite") {
-			$this->data = array_merge($this->data, $this->vite());
 			$this->updatePackageDotJsonForVite();
 		} else {
 			$this->updatePackageDotJsonForWebpack();
@@ -42,7 +41,7 @@ class PepperidgeCommand extends Command
 		return 0;
 	}
 	
-	private function updatePackageDotJsonForWebpack(): self
+	private function updatePackageDotJsonForWebpack(): void
 	{
 		file_put_contents(base_path('package.json'), preg_replace('/"scripts": {.*?}/s', '"scripts" : {
         "dev": "npm run development",
@@ -54,13 +53,20 @@ class PepperidgeCommand extends Command
         "production": "mix --production"
 	}', file_get_contents(base_path('package.json'))));
 		
-		copy(__DIR__ . '/../../Stubs/webpack.mix.js', base_path('webpack.mix.js'));
+		$content = file_get_contents(__DIR__ . '/../../Stubs/webpack.mix.js');
+		$content = str_replace(['key', 'cert', 'domain'], [
+			$this->data['key'],
+			$this->data['cert'],
+			$this->data['domain'],
+		], $content);
+		file_put_contents(base_path('webpack.mix.js'), $content);
+		
 		if (file_exists(base_path('vite.config.js'))) {
 			exec('rm vite.config.js');
 		}
 		
 		exec('npm remove vite laravel-vite-plugin lodash');
-		exec('npm i laravel-mix jquery resolve-url-loader sass-loader fs path --save-dev');
+		exec('npm i laravel-mix jquery resolve-url-loader sass-loader fs path laravel-mix-blade-reload --save-dev');
 		
 		$content = file_get_contents(base_path('.env'));
 		$content = str_replace('VITE_', 'MIX_', $content);
@@ -80,8 +86,6 @@ class PepperidgeCommand extends Command
 		copy(__DIR__ . '/../../Stubs/app.js', resource_path('js/app.js'));
 		copy(__DIR__ . '/../../Stubs/bootstrap.js', resource_path('js/bootstrap.js'));
 		exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('/'));
-		
-		return $this;
 	}
 	
 	private function updatePackageDotJsonForVite(): self
@@ -133,14 +137,8 @@ class PepperidgeCommand extends Command
 	private function data(): array
 	{
 		return [
-			'type' => $this->choice('type', [1 => 'Vite', 2 => 'webpack']),
-			'auth' => $this->confirm('With authentification ?'),
-		];
-	}
-	
-	private function vite(): array
-	{
-		return [
+			'type'   => $this->choice('type', [1 => 'Vite', 2 => 'webpack']),
+			'auth'   => $this->confirm('With authentification ?'),
 			'domain' => $this->ask('What is the domain name ?'),
 			'cert'   => $this->anticipate('SSL Certificates path', ['/usr/local/etc/nginx/cert-fullchain.pem', '/etc/letsencrypt/live/hins.dev/fullchain.pem']),
 			'key'    => $this->anticipate('SSL private key path', ['/usr/local/etc/nginx/cert-privkey.pem', '/etc/letsencrypt/live/hins.dev/privkey.pem']),
