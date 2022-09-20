@@ -17,18 +17,18 @@ class PepperidgeCommand extends Command
 	{
 		$this->data = $this->data();
 		
-		exec('composer require laravel/ui');
-		exec('php artisan ui bootstrap');
+		shell_exec('composer require laravel/ui');
+		shell_exec('php artisan ui bootstrap');
 		if ($this->data['auth']) {
-			exec('php artisan ui:auth --force');
+			shell_exec('php artisan ui:auth --force');
 		}
 		
 		if ($this->data['type'] === "Vite") {
 			$this->updatePackageDotJsonForVite();
-			exec('npm install && npm run dev');
+			shell_exec('npm install && npm run dev');
 		} else {
 			$this->updatePackageDotJsonForWebpack();
-			exec('npm install && npm run hot');
+			shell_exec('npm install && npm run dev && npm run hot');
 		}
 		
 		$this->line('Done ! Please make sure the js and css files have been added to your template.');
@@ -62,11 +62,11 @@ class PepperidgeCommand extends Command
 		file_put_contents(base_path('webpack.mix.js'), $content);
 		
 		if (file_exists(base_path('vite.config.js'))) {
-			exec('rm vite.config.js');
+			shell_exec('rm vite.config.js');
 		}
 		
-		exec('npm remove vite laravel-vite-plugin lodash');
-		exec('npm i laravel-mix jquery resolve-url-loader sass-loader fs path laravel-mix-blade-reload --save-dev');
+		shell_exec('npm remove vite laravel-vite-plugin lodash');
+		shell_exec('npm i laravel-mix jquery resolve-url-loader sass-loader fs path laravel-mix-blade-reload --save-dev');
 		
 		$content = file_get_contents(base_path('.env'));
 		$content = str_replace('VITE_', 'MIX_', $content);
@@ -85,9 +85,9 @@ class PepperidgeCommand extends Command
 		
 		copy(__DIR__ . '/../../Stubs/app.js', resource_path('js/app.js'));
 		copy(__DIR__ . '/../../Stubs/bootstrap.js', resource_path('js/bootstrap.js'));
-		exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('/'));
-		exec('cp -r ' . __DIR__ . '/../../Stubs/webpack/app.blade.php ' . resource_path('/views/layouts'));
-		exec('cp -r ' . __DIR__ . '/../../Stubs/webpack/welcome.blade.php ' . resource_path('/views'));
+		shell_exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('/'));
+		shell_exec('cp -r ' . __DIR__ . '/../../Stubs/webpack/app.blade.php ' . resource_path('/views/layouts'));
+		shell_exec('cp -r ' . __DIR__ . '/../../Stubs/webpack/welcome.blade.php ' . resource_path('/views'));
 	}
 	
 	private function updatePackageDotJsonForVite(): self
@@ -108,11 +108,11 @@ class PepperidgeCommand extends Command
 		);
 		
 		if (file_exists(base_path('webpack.mix.js'))) {
-			exec('rm webpack.mix.js');
+			shell_exec('rm webpack.mix.js');
 		}
 		
-		exec('npm remove laravel-mix lodash');
-		exec('npm i vite laravel-vite-plugin @rollup/plugin-inject jquery resolve-url-loader sass-loader fs path --save-dev');
+		shell_exec('npm remove laravel-mix lodash');
+		shell_exec('npm i vite laravel-vite-plugin @rollup/plugin-inject jquery resolve-url-loader sass-loader fs path --save-dev');
 		
 		$content = file_get_contents(base_path('.env'));
 		$content = str_replace('MIX_', 'VITE_', $content);
@@ -131,7 +131,7 @@ class PepperidgeCommand extends Command
 		
 		copy(__DIR__ . '/../../Stubs/vite/app.js', resource_path('js/app.js'));
 		copy(__DIR__ . '/../../Stubs/vite/bootstrap.js', resource_path('js/bootstrap.js'));
-		exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('/'));
+		shell_exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('/'));
 		
 		return $this;
 	}
