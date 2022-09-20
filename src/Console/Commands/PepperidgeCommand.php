@@ -25,17 +25,12 @@ class PepperidgeCommand extends Command
 		
 		if ($this->data['type'] === "Vite") {
 			$this->updatePackageDotJsonForVite();
+			$this->line('Done ! We\'ll try to install npm... if it fails please run : npm install && npm run dev');
 			shell_exec('npm install && npm run dev');
 		} else {
 			$this->updatePackageDotJsonForWebpack();
+			$this->line('Done ! We\'ll try to install npm... if it fails please run : npm install && npm run dev && npm run hot');
 			shell_exec('npm install && npm run dev && npm run hot');
-		}
-		
-		$this->line('Done ! Please make sure the js and css files have been added to your template.');
-		if ($this->data['type'] === 'Vite') {
-			$this->line('@vite([\'resources/sass/app.scss\', \'resources/js/app.js\'])');
-		} else {
-			$this->line('<link rel="stylesheet" href="{{ mix(\'css/app.css\') }}"><script src="{{ mix(\'js/app.js\') }}" defer></script>');
 		}
 		
 		return 0;
