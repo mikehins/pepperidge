@@ -80,9 +80,9 @@ class PepperidgeCommand extends Command
 		
 		copy(__DIR__ . '/../../Stubs/app.js', resource_path('js/app.js'));
 		copy(__DIR__ . '/../../Stubs/bootstrap.js', resource_path('js/bootstrap.js'));
-		copy(__DIR__ . '/../../Stubs/assets', resource_path('/'));
-		copy( __DIR__ . '/../../Stubs/webpack/app.blade.php', resource_path('/views/layouts'));
-		copy( __DIR__ . '/../../Stubs/webpack/welcome.blade.php', resource_path('/views'));
+		shell_exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('/'));
+		shell_exec('cp -r ' . __DIR__ . '/../../Stubs/webpack/app.blade.php ' . resource_path('/views/layouts'));
+		shell_exec('cp -r ' . __DIR__ . '/../../Stubs/webpack/welcome.blade.php ' . resource_path('/views'));
 	}
 	
 	private function updatePackageDotJsonForVite(): self
@@ -124,10 +124,10 @@ class PepperidgeCommand extends Command
 					file_get_contents(resource_path('views/welcome.blade.php'))));
 		}
 		
-		copy(__DIR__ . '/../../Stubs/vite/welcome.blade.php', resource_path('/views'));
+		shell_exec('cp -r ' . __DIR__ . '/../../Stubs/vite/welcome.blade.php ' . resource_path('/views'));
 		copy(__DIR__ . '/../../Stubs/vite/app.js', resource_path('js/app.js'));
 		copy(__DIR__ . '/../../Stubs/vite/bootstrap.js', resource_path('js/bootstrap.js'));
-		copy(__DIR__ . '/../../Stubs/assets', resource_path('/'));
+		shell_exec('cp -r ' . __DIR__ . '/../../Stubs/assets ' . resource_path('/'));
 		
 		return $this;
 	}
