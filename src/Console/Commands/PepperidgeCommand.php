@@ -54,7 +54,7 @@ class PepperidgeCommand extends Command
 	}', file_get_contents(base_path('package.json'))));
 		
 		$content = file_get_contents(__DIR__ . '/../../Stubs/webpack.mix.js');
-		$content = str_replace(['key', 'cert', 'domain'], [
+		$content = str_replace(['{{ key }}', '{{ cert }}', '{{ domain }}'], [
 			$this->data['key'],
 			$this->data['cert'],
 			$this->data['domain'],

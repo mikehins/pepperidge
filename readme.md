@@ -7,7 +7,8 @@
 [![](https://i.imgflip.com/6tmdsq.jpg)]
 
 ## Description
-Setup jquery and bootstrap 5 with vite js or webpack
+A modern classic stack
+Setup jquery and bootstrap 5 with vite js or webpack with hot reload
 Use Laravel mix/webpack in Laravel 9 with bootstrap 5 and authentification views like in the good old days.
 
 ## Install
