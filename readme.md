@@ -8,8 +8,10 @@
 
 ## Description
 A modern classic stack
-Setup jquery and bootstrap 5 with vite js or webpack with hot reload
-Use Laravel mix/webpack in Laravel 9 with bootstrap 5 and authentification views like in the good old days.
+
+Bring back the good old stuff... jQuery, bootstrap 5 and laravel blade authentification.
+
+Comes with vite or webpack and **hot reload** !!! 
 
 ## Install
 
