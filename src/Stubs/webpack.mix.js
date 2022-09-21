@@ -5,6 +5,7 @@ require('laravel-mix-blade-reload');
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .bladeReload()
+    .sourceMaps();
 
 // ALL PAGES SEPERATLY
 fs.readdirSync('resources/assets/js/pages').filter(p => /\.js$/.test(p))
@@ -20,7 +21,13 @@ if (!mix.inProduction()) {
                 key: fs.readFileSync('{{ key }}'),
                 cert: fs.readFileSync('{{ cert }}')
             }
-        }
+        },
+        module: {
+            rules: [{
+                test: /\.s[ac]ss$/i,
+                use: ["sass-loader",],
+            }],
+        },
     }).options({
         hmrOptions: {
             host: '{{ domain }}',
