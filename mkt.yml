@@ -1,0 +1,11 @@
+name: pepperidge
+desc: "A modern classic stack\r\n\r\nBring back the good old stuff... jQuery, bootstrap 5 and laravel blade authentification.\r\n\r\nComes with vite or webpack and hot reload !!!"
+price: 1
+price_extended: 100
+requirements:
+    - none
+license: Unlicense
+demo_url: 'https://github.com/mikehins/pepperidge'
+doc_url: 'https://github.com/mikehins/pepperidge'
+images:
+    - 'https://camo.githubusercontent.com/486d0bfec855255c0fd1c868bbc6f1bf9f0ea94ef758ef52304f2065f620bd87/68747470733a2f2f692e696d67666c69702e636f6d2f36746d6473712e6a7067'
