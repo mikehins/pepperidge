@@ -15,22 +15,14 @@ Comes with vite or webpack and **hot reload** !!!
 
 ## Install
 
-`composer require mikehins/pepperidge`
+```
+composer require mikehins/pepperidge
+```
 
 ## Usage
 
 ```bash
 php artisan pepperidge:remembers
-```
-
-Be sure to add the scripts in your templates
-```php
-@vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
-- or
-
-<link rel="stylesheet" href="{{ mix('css/app.css') }}">
-<script src="{{ mix('js/app.js') }}" defer></script>
 ```
 
 ## Changelog
