@@ -72,9 +72,9 @@ class Webpack
 	{
 		copy(__DIR__ . '/Stubs/app.js', resource_path('js/app.js'));
 		copy(__DIR__ . '/Stubs/bootstrap.js', resource_path('js/bootstrap.js'));
+		copy(__DIR__ . '/Stubs/webpack/app.blade.php', resource_path('/views/layouts/app.blade.php'));
+		copy(__DIR__ . '/Stubs/webpack/welcome.blade.php', resource_path('/views/welcome.blade.php'));
 		shell_exec('cp -r ' . __DIR__ . '/Stubs/assets ' . resource_path('/'));
-		shell_exec('cp -r ' . __DIR__ . '/Stubs/webpack/app.blade.php ' . resource_path('/views/layouts'));
-		shell_exec('cp -r ' . __DIR__ . '/Stubs/webpack/welcome.blade.php ' . resource_path('/views'));
 	}
 	
 	private function runNpm(): void
