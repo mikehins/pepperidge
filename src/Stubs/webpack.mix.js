@@ -22,6 +22,11 @@ if (!mix.inProduction()) {
                 cert: fs.readFileSync('{{ cert }}')
             }
         },
+        output: {
+            filename: '[name].js',
+            publicPath: '/',
+            globalObject: 'self'
+        },
         module: {
             rules: [{
                 test: /\.s[ac]ss$/i,
