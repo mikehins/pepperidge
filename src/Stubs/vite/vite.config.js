@@ -16,6 +16,7 @@ export default defineConfig({
     plugins: [
         inject({
             $: 'jquery',
+            jQuery: 'jquery',
         }),
         laravel({
             input: ['resources/scss/app.scss', 'resources/js/app.js'],
