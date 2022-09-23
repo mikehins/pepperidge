@@ -13,9 +13,9 @@
 
 Ok Boomers !
 
-We worked so hard to be comfortable in our old slippers and now the kids are trying to change our old ways with their javascripting nonsense.
+We worked so hard to be comfortable in our old slippers and now the kids are trying to change our old ways with their javascripting nonsense. Well take that punks !
 
-Bring back the good old stuff ! 
+Bring back the good old stuff !
 
 This package helps you scaffold your application with jQuery, bootstrap and laravel blade authentification.
 
@@ -33,6 +33,14 @@ composer require mikehins/pepperidge
 
 ```bash
 php artisan pepperidge:remembers
+```
+
+```bash
+// Vite
+npm install && npm run dev
+
+// Webpack
+npm install && npm run hot
 ```
 
 ```
@@ -65,6 +73,7 @@ That's it there you have it... You have now the same tools that you used when yo
 - [ ] Make "hot reload" or "custom domain" optional
 - [ ] Preset with examples for vue 2.x 3.x
 - [ ] Preset with examples for Inertia
+- [ ] Change the package name for boomer ??? `php artisan ok:boomer`
 - [ ] ...
 
 ## Changelog

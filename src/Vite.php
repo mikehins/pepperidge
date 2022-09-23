@@ -16,7 +16,6 @@ class Vite
 		$this->installJsDependencies();
 		$this->updateENVFile();
 		$this->copyStubs();
-		$this->runNpm();
 		
 		return 0;
 	}
@@ -72,10 +71,5 @@ class Vite
 		copy(__DIR__ . '/Stubs/vite/app.js', resource_path('js/app.js'));
 		copy(__DIR__ . '/Stubs/vite/bootstrap.js', resource_path('js/bootstrap.js'));
 		shell_exec('cp -r ' . __DIR__ . '/Stubs/assets ' . resource_path('/'));
-	}
-	
-	private function runNpm()
-	{
-		shell_exec('npm install && npm run dev');
 	}
 }

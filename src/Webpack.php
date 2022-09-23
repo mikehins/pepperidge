@@ -16,7 +16,6 @@ class Webpack
 		$this->installJsDependencies();
 		$this->updateENVFile();
 		$this->copyStubs();
-		$this->runNpm();
 		
 		return 0;
 	}
@@ -75,10 +74,5 @@ class Webpack
 		copy(__DIR__ . '/Stubs/webpack/app.blade.php', resource_path('/views/layouts/app.blade.php'));
 		copy(__DIR__ . '/Stubs/webpack/welcome.blade.php', resource_path('/views/welcome.blade.php'));
 		shell_exec('cp -r ' . __DIR__ . '/Stubs/assets ' . resource_path('/'));
-	}
-	
-	private function runNpm(): void
-	{
-		shell_exec('npm install && npm run dev && npm run hot');
 	}
 }

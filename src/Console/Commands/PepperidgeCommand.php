@@ -25,9 +25,12 @@ class PepperidgeCommand extends Command
 			? (new Vite($this->data))->handle()
 			: (new Webpack($this->data))->handle();
 		
+		$this->line('');
 		$this->data['type'] === 'Vite'
-			? $this->line('Done ! We\'ll try to install npm... if it fails please run : npm install && npm run dev')
-			: $this->line('Done ! We\'ll try to install npm... if it fails please run : npm install && npm run hot');
+			? $this->info('Please run npm install && npm run dev')
+			: $this->info('Please run npm install && npm run dev && npm run hot');
+		$this->line('')
+		
 		
 		return 0;
 	}
