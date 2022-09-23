@@ -29,7 +29,7 @@ class PepperidgeCommand extends Command
 		$this->data['type'] === 'Vite'
 			? $this->info('Please run npm install && npm run dev')
 			: $this->info('Please run npm install && npm run dev && npm run hot');
-		$this->line('')
+		$this->line('');
 		
 		
 		return 0;
