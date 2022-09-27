@@ -67,6 +67,21 @@ SSL private key path:
 
 That's it there you have it... You have now the same tools that you used when you were young, beautiful and full of potential.
 
+## Troubleshooting
+
+if you get the error `Error: EACCES: permission denied, open ssl certificate /etc/letsencrypt/live/domain.com/private.key` change the permissions on the group that use node
+
+[More info here](https://stackoverflow.com/questions/48078083/lets-encrypt-ssl-couldnt-start-by-error-eacces-permission-denied-open-et#answer-54903098)
+
+```bash
+sudo chgrp -R {Your Group} /etc/letsencrypt/live
+sudo chgrp -R {Your Group} /etc/letsencrypt/archive
+sudo chmod -R 750 /etc/letsencrypt/live
+sudo chmod -R 750 /etc/letsencrypt/archive
+sudo reboot
+```
+
+
 ## TODO
 
 - [x] Make sass files hot reloadable
