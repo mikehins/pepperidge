@@ -69,13 +69,29 @@ That's it there you have it... You have now the same tools that you used when yo
 
 ## Troubleshooting
 
-if you get the error `Error: EACCES: permission denied, open ssl certificate /etc/letsencrypt/live/domain.com/private.key` change the permissions on the group that use node
+if you get the error `Error: EACCES: permission denied, open '/etc/letsencrypt/live/domain.com/privkey.pem'` create a group, add your user to it and change the permission on the group.
 
 [More info here](https://stackoverflow.com/questions/48078083/lets-encrypt-ssl-couldnt-start-by-error-eacces-permission-denied-open-et#answer-54903098)
 
 ```bash
-sudo chgrp -R {Your Group} /etc/letsencrypt/live
-sudo chgrp -R {Your Group} /etc/letsencrypt/archive
+sudo addgroup nodecert
+sudo adduser {your username} nodecert
+sudo adduser root nodecert
+
+sudo chgrp -R nodecert /etc/letsencrypt/live
+sudo chgrp -R nodecert /etc/letsencrypt/archive
+sudo chmod -R 750 /etc/letsencrypt/live
+sudo chmod -R 750 /etc/letsencrypt/archive
+sudo reboot
+
+# You can reset permission with this command
+sudo groupdel nodecert
+sudo chown -R :root /etc/letsencrypt/live
+sudo chown -R :root /etc/letsencrypt/archive
+
+# If it's not working you can try to add your group
+sudo chgrp -R {your group} /etc/letsencrypt/live
+sudo chgrp -R {your group} /etc/letsencrypt/archive
 sudo chmod -R 750 /etc/letsencrypt/live
 sudo chmod -R 750 /etc/letsencrypt/archive
 sudo reboot
