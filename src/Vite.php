@@ -8,7 +8,7 @@ class Vite
 	{
 	}
 	
-	public function handle()
+	public function handle(): int
 	{
 		$this->updatePackageDotJson();
 		$this->updateViteConfig();
@@ -30,14 +30,14 @@ class Vite
 	
 	private function updateViteConfig(): void
 	{
-		file_put_contents(base_path('vite.config.js'), str_replace(
-				['{{ domain }}', '{{ cert }}', '{{ key }}'],
-				[
-					$this->data['domain'],
-					$this->data['cert'],
-					$this->data['key'],
-				],
-				file_get_contents(__DIR__ . '/Stubs/vite/vite.config.js'))
+		$findReplace = [
+			'{{ key }}'    => $this->data['key'],
+			'{{ cert }}'   => $this->data['cert'],
+			'{{ domain }}' => $this->data['domain'],
+		];
+		
+		file_put_contents(base_path('vite.config.js'),
+			str_replace(array_keys($findReplace), array_values($findReplace), file_get_contents(__DIR__ . '/Stubs/vite/vite.config.js'))
 		);
 	}
 	

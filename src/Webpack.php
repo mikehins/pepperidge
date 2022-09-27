@@ -33,15 +33,17 @@ class Webpack
 	}', file_get_contents(base_path('package.json'))));
 	}
 	
-	private function updateMixFile()
+	private function updateMixFile(): void
 	{
-		$content = file_get_contents(__DIR__ . '/Stubs/webpack.mix.js');
-		$content = str_replace(['{{ key }}', '{{ cert }}', '{{ domain }}'], [
-			$this->data['key'],
-			$this->data['cert'],
-			$this->data['domain'],
-		], $content);
-		file_put_contents(base_path('webpack.mix.js'), $content);
+		$findReplace = [
+			'{{ key }}'    => $this->data['key'],
+			'{{ cert }}'   => $this->data['cert'],
+			'{{ domain }}' => $this->data['domain'],
+		];
+		
+		file_put_contents(base_path('webpack.mix.js'),
+			str_replace(array_keys($findReplace), array_values($findReplace), file_get_contents(__DIR__ . '/Stubs/webpack.mix.js'))
+		);
 	}
 	
 	private function cleanUp(): void
@@ -53,7 +55,7 @@ class Webpack
 		shell_exec('npm remove vite laravel-vite-plugin lodash');
 	}
 	
-	private function installJsDependencies()
+	private function installJsDependencies(): void
 	{
 		shell_exec('npm i laravel-mix jquery resolve-url-loader sass-loader fs path laravel-mix-blade-reload --save-dev');
 	}
